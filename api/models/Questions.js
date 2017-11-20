@@ -7,8 +7,10 @@
 
 module.exports = {
 
-  attributes: {
-
-  }
+    attributes: {
+        flagged: { type:"boolean", default:false },
+        isMultiSelect: { type:"boolean", default:false },
+        active: { type:"boolean", default:true },
+        body: {type: "string"},
+    }
 };
-

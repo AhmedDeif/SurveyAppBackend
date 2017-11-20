@@ -17,7 +17,7 @@ module.exports = {
     first_name: "string",
     fb: {type: "string", unique: true},
     fb_access_token: "string",
-    admin: {type:"boolean" , default:false} ,
+    admin: {type:"boolean" , default:false},
     email: {type: "email", unique: true},
     phone: {type: "string", unique: true},
     avatarFd: "string",
