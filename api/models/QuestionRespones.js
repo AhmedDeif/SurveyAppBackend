@@ -7,8 +7,9 @@
 
 module.exports = {
 
-  attributes: {
-
-  }
+    attributes: {
+        response : { model:'SurveyRespones'},
+        question : { model:'Questions'},
+        answer : { model:'Answers'},
+    }
 };
-

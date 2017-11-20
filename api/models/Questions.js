@@ -12,5 +12,9 @@ module.exports = {
         isMultiSelect: { type:"boolean", default:false },
         active: { type:"boolean", default:true },
         body: {type: "string"},
+        answers: {
+            collection: 'Answers',
+            via: 'question'
+        },
     }
 };

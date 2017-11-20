@@ -7,8 +7,10 @@
 
 module.exports = {
 
-  attributes: {
-
-  }
+    attributes: {
+        phone: {type: "string"},
+        last_name: {type: "string"},
+        first_name: {type: "string"},
+        email: {type: "email"},
+    }
 };
-

@@ -7,8 +7,9 @@
 
 module.exports = {
 
-  attributes: {
-
-  }
+    attributes: {
+        question : { model:'Questions' },
+        isNumerical : { type:"boolean", default:true },
+        body : { type:"string"},
+    }
 };
-
