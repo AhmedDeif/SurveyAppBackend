@@ -8,8 +8,14 @@
 module.exports = {
 
     attributes: {
-        response : { model:'SurveyRespones'},
-        question : { model:'Questions'},
-        answer : { model:'Answers'},
+        response : {
+            model:'SurveyRespones'
+        },
+        question : {
+            model:'Questions'
+        },
+        answer : {
+            model:'Answers'
+        }
     }
 };

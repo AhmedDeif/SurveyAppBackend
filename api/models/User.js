@@ -1,18 +1,16 @@
-/**
- * User.js
- *
- * @description :: TODO: You might write a short summary of how this model works and what it represents here.
- * @docs        :: http://sailsjs.org/#!documentation/models
- */
-var lookup = require("country-data").lookup;
+
+
 var bcrypt = require("bcrypt-nodejs");
 var uuid = require('node-uuid');
 
 module.exports = {
 
   attributes: {
-    id: {type: "Integer", autoIncrement: true, primaryKey: true},
-    uuid: {type: "string", unique: true},
+    id: {
+        type: "Integer",
+        autoIncrement: true,
+        primaryKey: true
+    },
     last_name: "string",
     first_name: "string",
     fb: {type: "string", unique: true},

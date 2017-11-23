@@ -8,10 +8,17 @@
 module.exports = {
 
     attributes: {
-        flagged: { type:"boolean", default:false },
-        isMultiSelect: { type:"boolean", default:false },
-        active: { type:"boolean", default:true },
-        body: {type: "string"},
+        isMultiSelect: {
+            type:"boolean",
+            defaultsTo:false
+        },
+        active: {
+            type:"boolean",
+            defaultsTo:true
+        },
+        body: {
+            type: "string"
+        },
         answers: {
             collection: 'Answers',
             via: 'question'

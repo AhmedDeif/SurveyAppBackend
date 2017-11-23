@@ -8,8 +8,18 @@
 module.exports = {
 
     attributes: {
-        question : { model:'Questions' },
-        isNumerical : { type:"boolean", default:true },
-        body : { type:"string"},
+        question : {
+            model:'Questions'
+        },
+        isNumerical : {
+            type:"boolean",
+            defaultsTo:true
+        },
+        value : {
+            type:"integer"
+        },
+        body : {
+            type:"string"
+        }
     }
 };

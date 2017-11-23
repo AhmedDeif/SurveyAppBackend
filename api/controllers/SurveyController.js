@@ -1,14 +1,71 @@
 module.exports = {
 
+    serverStatus : function (req, res) {
+        res.ok('Sha3al yasta');
+    },
+
     // Allows the admin to a new question to survey
     addQuestion : function(req, res) {
-
+        var question = {};
+        var responseObj = {};
+        if (req.body.body && req.body.isMultiSelect) {
+            question.body = req.body.body;
+            question.isMultiSelect = req.body.isMultiSelect;
+            SurveyService.addQuestionToSurvey(question, function(err, record) {
+                if (err) {
+                    responseObj.error = "Server error";
+                }
+                else {
+                    responseObj.data = record;
+                }
+                res.json(responseObj);
+            });
+        }
+        else {
+            responseObj.error = "Missing Parameters";
+            res.json(responseObj);
+        }
     },
 
     // Allows the admin to remove a question from survey, set as inactive
     removeQuestion: function(req, res) {
+        var responseObj = {};
+        if(req.body.question) {
+            SurveyService.removeQuestionFromSurvey(req.body.question, function(err, record) {
+                if (err) {
+                    responseObj.error = "Server error";
+                }
+                else {
+                    responseObj.data = record;
+                }
+                res.json(responseObj);
+            });
+        }
+        else {
+            responseObj.error = "Missing Parameters";
+            res.json(responseObj);
+        }
+    },
 
-    }
+    // Allows the admin to set a question as active
+    reactivateQuestion : function(req, res) {
+        var responseObj = {};
+        if(req.body.question) {
+            SurveyService.reactivateQuestion(req.body.question, function(err, record) {
+                if (err) {
+                    responseObj.error = "Server error";
+                }
+                else {
+                    responseObj.data = record;
+                }
+                res.json(responseObj);
+            });
+        }
+        else {
+            responseObj.error = "Missing Parameters";
+            res.json(responseObj);
+        }
+    },
 
     // Allows the admin to add an answer to a question in survey
     addAnswer : function(req, res) {
