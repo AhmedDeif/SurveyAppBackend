@@ -6,6 +6,16 @@
  */
 
 module.exports = {
-	
+	getActiveQuestions: function(req,res){
+		var responseObj = {};
+				QuestionService.getActiveQuestions(function(err, record) {
+						if (err) {
+								responseObj.error = "Server error";
+						}
+						else {
+								responseObj.data = record;
+						}
+						res.json(responseObj);
+				});
+	}
 };
-
