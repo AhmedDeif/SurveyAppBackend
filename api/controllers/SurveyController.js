@@ -69,12 +69,73 @@ module.exports = {
 
     // Allows the admin to add an answer to a question in survey
     addAnswer : function(req, res) {
+      var answer = {};
+      var responseObj = {};
+      if (req.body.questionId && req.body.value && req.body.isNumerical && req.body.body) {
+          answer.body = req.body.body;
+          answer.value = req.body.value;
+          answer.isNumerical = req.body.isNumerical;
+          answer.question  = req.body.questionId
 
+          SurveyService.addAnswer(answer, function(err, record) {
+              if (err) {
+                  responseObj.error = "Server error";
+              }
+              else {
+                  responseObj.data = record;
+              }
+              res.json(responseObj);
+          });
+      }
+      else {
+          responseObj.error = "Missing Parameters";
+          res.json(responseObj);
+      }
     },
 
     // Allows the admin to remove an answer to a question in survey
     removeAnswer : function(req, res) {
 
+      var responseObj = {};
+      if(req.body.id) {
+          SurveyService.removeAnswer(req.body.id, function(err, record) {
+              if (err) {
+                  responseObj.error = "Server error";
+              }
+              else {
+                  responseObj.data = record;
+              }
+              res.json(responseObj);
+          });
+      }
+      else {
+          responseObj.error = "Missing Parameters";
+          res.json(responseObj);
+      }
+    },
+    // Allows the admin to update an answer
+    updateAnswer : function(req,res){
+      var responseObj = {};
+      var answer = {}
+      if(req.body.value && req.body.isNumerical && req.body.body && req.body.id) {
+        answer.value = req.body.value;
+        answer.isNumerical = req.body.isNumerical;
+        answer.body = req.body.body;
+        answer.id = req.body.id;
+          SurveyService.updateAnswer(answer, function(err, record) {
+              if (err) {
+                  responseObj.error = "Server error";
+              }
+              else {
+                  responseObj.data = record;
+              }
+              res.json(responseObj);
+          });
+      }
+      else {
+          responseObj.error = "Missing Parameters";
+          res.json(responseObj);
+      }
     },
 
     // Allows the admin to view a specific response (answers to all questions of a specific user)
