@@ -11,9 +11,13 @@ module.exports = {
 				QuestionService.getActiveQuestions(function(err, record) {
 						if (err) {
 								responseObj.error = "Server error";
+								responseObj.data = false;
+
 						}
 						else {
 								responseObj.data = record;
+								responseObj.error = false;
+
 						}
 						res.json(responseObj);
 				});

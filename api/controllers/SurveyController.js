@@ -11,18 +11,25 @@ module.exports = {
         if (req.body.body && req.body.isMultiSelect) {
             question.body = req.body.body;
             question.isMultiSelect = req.body.isMultiSelect;
+            question.active = req.body.active;
             SurveyService.addQuestionToSurvey(question, function(err, record) {
                 if (err) {
                     responseObj.error = "Server error";
+                    responseObj.data = false;
+
                 }
                 else {
                     responseObj.data = record;
+                    responseObj.error = false;
+
                 }
                 res.json(responseObj);
             });
         }
         else {
             responseObj.error = "Missing Parameters";
+            responseObj.data = false;
+
             res.json(responseObj);
         }
     },
@@ -34,15 +41,21 @@ module.exports = {
             SurveyService.removeQuestionFromSurvey(req.body.question, function(err, record) {
                 if (err) {
                     responseObj.error = "Server error";
+                    responseObj.data = false;
+
                 }
                 else {
                     responseObj.data = record;
+                    responseObj.error = false;
+
                 }
                 res.json(responseObj);
             });
         }
         else {
             responseObj.error = "Missing Parameters";
+            responseObj.data = false;
+
             res.json(responseObj);
         }
     },
@@ -54,15 +67,21 @@ module.exports = {
             SurveyService.reactivateQuestion(req.body.question, function(err, record) {
                 if (err) {
                     responseObj.error = "Server error";
+                    responseObj.data = false;
+
                 }
                 else {
                     responseObj.data = record;
+                    responseObj.error = false;
+
                 }
                 res.json(responseObj);
             });
         }
         else {
             responseObj.error = "Missing Parameters";
+            responseObj.data = false;
+
             res.json(responseObj);
         }
     },
@@ -80,15 +99,21 @@ module.exports = {
           SurveyService.addAnswer(answer, function(err, record) {
               if (err) {
                   responseObj.error = "Server error";
+                  responseObj.data = false;
+
               }
               else {
                   responseObj.data = record;
+                  responseObj.error = false;
+
               }
               res.json(responseObj);
           });
       }
       else {
           responseObj.error = "Missing Parameters";
+          responseObj.data = false;
+
           res.json(responseObj);
       }
     },
@@ -101,15 +126,21 @@ module.exports = {
           SurveyService.removeAnswer(req.body.id, function(err, record) {
               if (err) {
                   responseObj.error = "Server error";
+                  responseObj.data = false;
+
               }
               else {
                   responseObj.data = record;
+                  responseObj.error = false;
+
               }
               res.json(responseObj);
           });
       }
       else {
           responseObj.error = "Missing Parameters";
+          responseObj.data = false;
+
           res.json(responseObj);
       }
     },
@@ -125,15 +156,21 @@ module.exports = {
           SurveyService.updateAnswer(answer, function(err, record) {
               if (err) {
                   responseObj.error = "Server error";
+                  responseObj.data = false;
+
               }
               else {
                   responseObj.data = record;
+                  responseObj.error = false;
+
               }
               res.json(responseObj);
           });
       }
       else {
           responseObj.error = "Missing Parameters";
+          responseObj.data = false;
+
           res.json(responseObj);
       }
     },
