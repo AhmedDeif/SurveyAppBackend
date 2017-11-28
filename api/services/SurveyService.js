@@ -6,7 +6,8 @@ module.exports = {
         if (question.body) {
             Questions.create(question).exec(function(err, record) {
                 if (err) {
-                    console.log('An error has occured');
+                    console.log('An error has occured',err);
+                    console.log(question)
                     callback(err, null);
                 }
                 else {
@@ -99,6 +100,40 @@ module.exports = {
         }
         else {
             callback('Missing attributes, answer does not exist', null);
+        }
+    },
+    addResponse: function(response,callback) {
+      console.log("Service " , response);
+        if (response) {
+          QuestionRespones.create(response).exec(function(err, record) {
+              if (err) {
+                  console.log('An error has occured');
+                  callback(err, null);
+              }
+              else {
+                  callback(null, record);
+                  console.log("Record created " , record);
+              }
+          });
+        }
+        else {
+            callback('Missing attributes,Can not create response', null);
+        }
+    },
+    addSurveyResponse: function(response,callback) {
+        if (response) {
+          SurveyRespones.create(response).exec(function(err, record) {
+              if (err) {
+                  console.log('An error has occured');
+                  callback(err, null);
+              }
+              else {
+                  callback(null, record);
+              }
+          });
+        }
+        else {
+            callback('Missing attributes,Can not create survey response', null);
         }
     },
 
