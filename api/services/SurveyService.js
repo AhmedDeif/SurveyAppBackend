@@ -62,6 +62,8 @@ module.exports = {
                   callback(err, null);
               }
               else {
+                console.log('no error has occured',record);
+
                   callback(null, record);
               }
           });
@@ -136,5 +138,37 @@ module.exports = {
             callback('Missing attributes,Can not create survey response', null);
         }
     },
+    findQuestionResponse: function(response,callback){
+      if(response){
+        QuestionRespones.find({question:response}).exec(function(err,records){
+          if (err) {
+              console.log('An error has occured');
+              callback(err, null);
+          }
+          else {
+              callback(null, records);
+          }
+        });
+      }else{
+        callback('Missing attributes,Can not find question response', null);
+
+      }
+    },
+    findQAnswersOfResponse: function(response,callback){
+      if(response){
+        QuestionRespones.find({response:response}).exec(function(err,records){
+          if (err) {
+              console.log('An error has occured');
+              callback(err, null);
+          }
+          else {
+              callback(null, records);
+          }
+        });
+      }else{
+        callback('Missing attributes,Can not find  response', null);
+
+      }
+    }
 
 }

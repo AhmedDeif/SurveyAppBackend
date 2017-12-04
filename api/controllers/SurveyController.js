@@ -2,31 +2,68 @@ module.exports = {
 
     serverStatus : function (req, res) {
         res.ok('Sha3al yasta');
+        console.log("working yasta");
     },
 
     // Allows the admin to a new question to survey
     addQuestion : function(req, res) {
+      console.log("add question", req.body);
+
         var question = {};
         var responseObj = {};
+        var array = [{}];
         if (req.body.body && req.body.isMultiSelect) {
+          console.log("add question if");
+
             question.body = req.body.body;
             question.isMultiSelect = req.body.isMultiSelect;
             question.active = req.body.active;
             SurveyService.addQuestionToSurvey(question, function(err, record) {
                 if (err) {
+                  console.log("add question if error");
+
                     responseObj.error = "Server error";
                     responseObj.data = false;
 
                 }
                 else {
+                  // on success if answers exist add them to created question
                     responseObj.data = record;
                     responseObj.error = false;
+                    if (req.body.answers) {
+                      // SurveyController.addAnswer(req, res);
+                      array = req.body.answers;
+                      var tempObject = {};
+                 			for (var i = 0 ; i<array.length ; i++){
+                 					tempObject.body = array[i].body;
+                 					tempObject.value = array[i].value;
+                 					tempObject.isNumerical = array[i].isNumerical;
+                          tempObject.question = record.id;
 
+                          if (tempObject) {
+
+                              SurveyService.addAnswer(tempObject, function(err, record) {
+                                  if (err) {
+                                      responseObj.error = "Server error";
+                                      responseObj.data = false;
+                                  }
+                                  else {
+                                      responseObj.data = record;
+                                      responseObj.error = false;
+
+                                  }
+                              });
+                          }
+                 					tempObject = {};
+                 			}
+                      // END
+                    }
                 }
                 res.json(responseObj);
             });
         }
         else {
+            console.log("add question else");
             responseObj.error = "Missing Parameters";
             responseObj.data = false;
 
@@ -37,14 +74,19 @@ module.exports = {
     // Allows the admin to remove a question from survey, set as inactive
     removeQuestion: function(req, res) {
         var responseObj = {};
-        if(req.body.question) {
-            SurveyService.removeQuestionFromSurvey(req.body.question, function(err, record) {
+        var id = req.param('id');
+
+        if(id) {
+
+            SurveyService.removeQuestionFromSurvey(id, function(err, record) {
                 if (err) {
+
                     responseObj.error = "Server error";
                     responseObj.data = false;
 
                 }
                 else {
+
                     responseObj.data = record;
                     responseObj.error = false;
 
@@ -53,6 +95,7 @@ module.exports = {
             });
         }
         else {
+
             responseObj.error = "Missing Parameters";
             responseObj.data = false;
 
@@ -90,7 +133,10 @@ module.exports = {
     addAnswer : function(req, res) {
       var answer = {};
       var responseObj = {};
-      if (req.body.questionId && req.body.value && req.body.isNumerical && req.body.body) {
+      console.log("Add answer func");
+      if (req.body.answer.questionId && req.body.answer.value && req.body.answer.isNumerical && req.body.answer.body) {
+        console.log("Add answer func if");
+
           answer.body = req.body.body;
           answer.value = req.body.value;
           answer.isNumerical = req.body.isNumerical;
@@ -111,6 +157,8 @@ module.exports = {
           });
       }
       else {
+        console.log("Add answer func Missing Parameters");
+
           responseObj.error = "Missing Parameters";
           responseObj.data = false;
 

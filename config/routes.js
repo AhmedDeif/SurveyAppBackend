@@ -46,7 +46,15 @@ module.exports.routes = {
   'POST /user/avatar': "UserController.uploadAvatar",
   'GET /user/avatar/:id': "UserController.avatar",
 
-  /***************************************************************************
+  'POST /questions' : "SurveyController.addQuestion",
+  'DELETE /questions/:id' : "SurveyController.removeQuestion",
+  // 'GET /questionRespones/findResponseOfOneQuestion/:id' : "QuestionResponesController.findResponseOfOneQuestion",
+  // update question
+  // 'PUT /questions/:id' : "SurveyController.addAnswer",
+
+
+
+    /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
   *                                                                          *

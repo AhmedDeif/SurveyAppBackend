@@ -22,4 +22,6 @@ module.exports = {
 						res.json(responseObj);
 				});
 	}
+
+
 };

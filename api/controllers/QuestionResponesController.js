@@ -46,5 +46,54 @@ module.exports = {
 
 				res.json(responseObj);
 		}
+	},
+	findResponseOfOneQuestion:function(req,res){
+		var response = req.param("id")
+		var responseObj = {};
+		if (response) {
+				SurveyService.findQuestionResponse(response, function(err, records) {
+						if (err) {
+								responseObj.error = "Server error";
+								responseObj.data = false;
+
+						}
+						else {
+								responseObj.data = records;
+								responseObj.error = false;
+
+						}
+						res.json(responseObj);
+				});
+		}
+		else {
+				responseObj.error = "Missing Parameters";
+				responseObj.data = false;
+				res.json(responseObj);
+		}
+	},
+	findAnswersOfAReponse:function(req,res){
+		var response = req.param("id")
+		var responseObj = {};
+		if (response) {
+				SurveyService.findQAnswersOfResponse(response, function(err, records) {
+						if (err) {
+								responseObj.error = "Server error";
+								responseObj.data = false;
+
+						}
+						else {
+								responseObj.data = records;
+								responseObj.error = false;
+
+						}
+						res.json(responseObj);
+				});
+		}
+		else {
+				responseObj.error = "Missing Parameters";
+				responseObj.data = false;
+				res.json(responseObj);
+		}
 	}
+
 };
