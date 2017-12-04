@@ -94,6 +94,30 @@ module.exports = {
 				responseObj.data = false;
 				res.json(responseObj);
 		}
+	},
+	findGroupedQuestions:function(req,res){
+		var response = req;
+		var responseObj = {};
+		if (response) {
+				SurveyService.findGroupedQuestions(response, function(err, records) {
+						if (err) {
+								responseObj.error = "Server error";
+								responseObj.data = false;
+
+						}
+						else {
+								responseObj.data = records;
+								responseObj.error = false;
+
+						}
+						res.json(responseObj);
+				});
+		}
+		else {
+				responseObj.error = "Missing Parameters";
+				responseObj.data = false;
+				res.json(responseObj);
+		}
 	}
 
 };

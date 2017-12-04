@@ -169,6 +169,23 @@ module.exports = {
         callback('Missing attributes,Can not find  response', null);
 
       }
+    },
+    findGroupedQuestions:function(response,callback)
+    {
+      if(response){
+        QuestionRespones.find().exec(function(err,records){
+          if (err) {
+              console.log('An error has occured');
+              callback(err, null);
+          }
+          else {
+              callback(null, records);
+          }
+        });
+      }else{
+        callback('Missing attributes,Can not find  response', null);
+
+      }
     }
 
 }
